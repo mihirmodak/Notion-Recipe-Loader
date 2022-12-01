@@ -1,5 +1,3 @@
-# To add a new cell, type '# %%'
-# To add a new markdown cell, type '# %% [markdown]'
 # %%
 from dotenv import dotenv_values
 env = dotenv_values(".env")
@@ -8,11 +6,9 @@ import requests
 import json
 import argparse
 
-
 # %%
 parser = argparse.ArgumentParser(description='URL')
 parser.add_argument('--url', '-u', help='The URL for the recipe', required=True)
-
 
 # %%
 api_url = "https://mycookbook-io1.p.rapidapi.com/recipes/rapidapi"
@@ -26,30 +22,21 @@ headers = {
     'x-rapidapi-key': env['MYCOOKBOOK_KEY']
     }
 
-
 # %%
 response = requests.request("POST", api_url, data=recipe, headers=headers)
-
 
 # %%
 with open("response.json", 'w+') as f:
     json.dump(response.json(), f)
 
-
 # %%
 responseData = response.json()[0]
 responseData.keys()
 
-
 # %%
-notion_url = f"https://api.notion.com/v1/pages"
+notion_post_url = "https://api.notion.com/v1/pages"
 
-notion_tokens = {'Authorization': env['NOTION_KEY']}
-
-
-# %%
-responseData['instructions'][0]['steps']
-
+notion_tokens = {'Authorization': env['NOTION_KEY'], 'Notion-Version':"2022-06-28"}
 
 # %%
 pageData = [
@@ -57,7 +44,7 @@ pageData = [
         {
             "type": "heading_3",
             "heading_3": {
-                "text": [{
+                "rich_text": [{
                     "type": "text",
                         "text": {
                             "content": "Description"
@@ -69,7 +56,7 @@ pageData = [
         {
             "type": "paragraph",
             "paragraph": {
-                "text": [{
+                "rich_text": [{
                     "type": "text",
                     "text": {
                         "content": responseData['description'],
@@ -81,7 +68,7 @@ pageData = [
         {
             "type": "heading_3",
             "heading_3": {
-                "text": [{
+                "rich_text": [{
                 "type": "text",
                     "text": {
                         "content": "Ingredients"
@@ -96,7 +83,7 @@ for item in responseData['ingredients']:
         {
             "type": "bulleted_list_item",
             "bulleted_list_item": {
-                "text": [{
+                "rich_text": [{
                     "type": "text",
                     "text": {
                         "content": item
@@ -112,7 +99,7 @@ pageData.append(
     {
         "type": "heading_3",
         "heading_3": {
-            "text": [{
+            "rich_text": [{
             "type": "text",
                 "text": {
                     "content": "Instructions"
@@ -127,7 +114,7 @@ for item in responseData['instructions'][0]['steps']:
         {
             "type": "numbered_list_item",
             "numbered_list_item": {
-                "text": [{
+                "rich_text": [{
                     "type": "text",
                     "text": {
                         "content": item
@@ -141,7 +128,7 @@ pageData.append(
         {
             "type": "heading_3",
             "heading_3": {
-                "text": [{
+                "rich_text": [{
                 "type": "text",
                     "text": {
                         "content": "Notes"
@@ -151,52 +138,83 @@ pageData.append(
         }
     )
 
-
 # %%
-data = {
-    "parent":{"database_id":env['NOTION_DATABASE_ID']},
+try:
+    data = {
+        "parent":{"database_id":env['NOTION_DATABASE_ID']},
 
-    "properties": {
-        "Name" : {
-            "title": [
-                {
-                    "text": {
-                        "content": responseData['name'] 
-                    }
+        "icon": {
+                "type":"external",
+                "external":{
+                    "url":"https://i.imgur.com/1bY0aV1.png"
                 }
-            ]
         },
 
-        "URL":{
-            "url":responseData['url']
+        "properties": {
+            "Name" : {
+                "title": [
+                    {
+                        "text": {
+                            "content": responseData['name'] 
+                        }
+                    }
+                ]
+            },
+
+            "URL":{
+                "url":responseData['url']
+            },
+
+            "Cover":{
+                "files":[{
+                    "type":"external",
+                    "name":"Cover",
+                    "external":{"url":"https://i.imgur.com/rMMMi1r.png"}
+                }]
+            },
+
+            "Prep Time (min)": {
+                "number":int(responseData['prep-time'][2:-1]) if responseData['prep-time'][-1] == 'M' else int(responseData['prep-time'][2:-1])*60 if responseData['prep-time'][-1] == 'H' else None
+            },
+
+            "Total Time (min)": {
+                "number":int(responseData['total-time'][2:-1]) if responseData['total-time'][-1] == 'M' else int(responseData['total-time'][2:-1])*60 if responseData['total-time'][-1] == 'H' else None
+            },
+
         },
 
-        "Prep Time (min)": {
-            "number":int(responseData['prep-time'][2:-1]) if responseData['prep-time'][-1] == 'M' else int(responseData['prep-time'][2:-1])*60 if responseData['prep-time'][-1] == 'H' else -1
+        "children":pageData
+
+    }
+except IndexError:
+    data = {
+        "parent":{"database_id":env['NOTION_DATABASE_ID']},
+
+        "properties": {
+            "Name" : {
+                "title": [
+                    {
+                        "text": {
+                            "content": responseData['name'] 
+                        }
+                    }
+                ]
+            },
+
+            "URL":{
+                "url":responseData['url']
+            },
+
         },
 
-        "Total Time (min)": {
-            "number":int(responseData['total-time'][2:-1]) if responseData['total-time'][-1] == 'M' else int(responseData['total-time'][2:-1])*60 if responseData['total-time'][-1] == 'H' else -1
-        },
+        "children":pageData
 
-    },
+    }
 
-    "children":pageData
-
-}
-
-r = requests.post(notion_url, json=data, headers=notion_tokens)
+r = requests.post(notion_post_url, json=data, headers=notion_tokens)
 print(f"{responseData['name']} --> {r.status_code}")
 if r.status_code != 200:
     errorData = json.loads(r.text)
     print(f"{errorData['code']} : {errorData['message']}")
-
-
-# %%
-responseData
-
-
-# %%
-
 
 
