@@ -1,0 +1,182 @@
+{
+    "parent": {
+        "database_id": null
+    },
+    "cover": null,
+    "icon": {
+        "type": "external",
+        "external": {
+            "url": "https://i.imgur.com/1bY0aV1.png"
+        }
+    },
+    "properties": {
+        "Name": {
+            "type": "title",
+            "title": [
+                {
+                    "type": "text",
+                    "text": {
+                        "content": null,
+                        "link": null
+                    },
+                    "annotations": {
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "code": false,
+                        "color": "default"
+                    }
+                }
+            ]
+        },
+        "Ingredients": {
+            "type": "relation",
+            "relation": []
+        },
+        "URL": {
+            "type": "url",
+            "url": null
+        },
+        "Course": {
+            "type": "multi_select",
+            "multi_select": []
+        },
+        "Servings":{
+            "type": "number",
+            "number": null
+        },
+        "Calories": {
+            "type": "number",
+            "number": null
+        },
+        "Protein (g)": {
+            "type": "number",
+            "number": null
+        },
+        "Prep Time (min)": {
+            "type": "number",
+            "number": null
+        },
+        "Cooking Time (min)": {
+            "type": "number",
+            "number": null
+        },
+        "Total Time (min)": {
+            "type": "number",
+            "number": null
+        },
+        "Favorite": {
+            "type": "checkbox",
+            "checkbox": false
+        },
+        "Cuisine": {
+            "type": "multi_select",
+            "multi_select": []
+        },
+        "Time Label": {
+            "type": "rich_text",
+            "rich_text": [
+                {
+                    "type": "text",
+                    "text": {
+                        "content": "Total Time",
+                        "link": null
+                    },
+                    "annotations": {
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "code": false,
+                        "color": "gray"
+                    },
+                    "plain_text": "Total Time",
+                    "href": null
+                }
+            ]
+        },
+        "Tags": {
+            "type": "multi_select",
+            "multi_select": []
+        },
+        "Course Label": {
+            "type": "rich_text",
+            "rich_text": [
+                {
+                    "type": "text",
+                    "text": {
+                        "content": "Course",
+                        "link": null
+                    },
+                    "annotations": {
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "code": false,
+                        "color": "gray"
+                    },
+                    "plain_text": "Course",
+                    "href": null
+                }
+            ]
+        },
+        "Tags Label": {
+            "type": "rich_text",
+            "rich_text": [
+                {
+                    "type": "text",
+                    "text": {
+                        "content": "Tags",
+                        "link": null
+                    },
+                    "annotations": {
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "code": false,
+                        "color": "gray"
+                    },
+                    "plain_text": "Tags",
+                    "href": null
+                }
+            ]
+        },
+        "Calorie-Protein Ratio Label": {
+            "type": "rich_text",
+            "rich_text": [
+                {
+                    "type": "text",
+                    "text": {
+                        "content": "Calorie-Protein Ratio",
+                        "link": null
+                    },
+                    "annotations": {
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "code": false,
+                        "color": "gray"
+                    },
+                    "plain_text": "Calorie-Protein Ratio",
+                    "href": null
+                }
+            ]
+        },
+        "Cover": {
+            "type": "files",
+            "files": [
+                {
+                    "name": "Cover",
+                    "type": "external",
+                    "external": {
+                        "url": "https://i.imgur.com/rMMMi1r.png"
+                    }
+                }
+            ]
+        }
+    }
+}

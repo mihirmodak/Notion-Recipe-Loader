@@ -1,20 +1,17 @@
 # Notion Recipe Loader
-This Notion Recipe Parser tool lets you load recipe content from any website recipe into a Notion page.
 
-## Dependencies:
+This Notion Recipe Parser tool lets you load recipe content from any website recipe into a Notion page in a specific database.
 
-- A MyCookBook.io API Key ([link](https://rapidapi.com/mycookbook/api/mycookbook-io1))
+## Dependencies
 
-- A Notion API Key ([link](https://developers.notion.com/))
-
-- The database ID of the end point Notion page (the final home of the recipes)
-
-- Python 3 and some of its packages:
-
-    - `json`
-    - `dotenv`
-    - `requests`
-    - `argparse`
+| Name | Source |
+| ---- | ---- |
+| Spoonacular Recipe-Food-Nutrition API | [https://rapidapi.com/spoonacular/api/recipe-food-nutrition/](https://rapidapi.com/spoonacular/api/recipe-food-nutrition/) |
+|Notion & the Notion API | [https://developers.notion.com/](https://developers.notion.com/) |
+| NodeJS | [https://nodejs.org/en/download](https://nodejs.org/en/download) |
+| NodeJS: Axios | `npm install axios` |
+| NodeJS: dotenv | `npm install dotenv` |
+| NodeJS: prompt-sync | `npm install prompt-sync` |
 
 ## Before you run `main.py`
 
@@ -22,19 +19,20 @@ This program tries to protect all involved API keys using the `dotenv` library. 
 
 `MYCOOKBOOK_KEY` &rarr; MyCookBook.io API Key
 
-`NOTION_KEY` &rarr; Notion API Key 
+`NOTION_KEY` &rarr; Notion API Key
 
 `NOTION_DATABASE_ID` &rarr; The ID of the Notion database where all your recipes will be stored
 
 ## To Save a Recipe
 
 To save a recipe into a pre-designated Notion database, run:
-```
+
+```cmd
 python3 main.py --url <url>
 ```
 
 OR
 
-```
+```cmd
 python3 main.py -u <url>
 ```
