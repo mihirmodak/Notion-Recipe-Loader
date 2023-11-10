@@ -42,7 +42,7 @@
             "type": "multi_select",
             "multi_select": []
         },
-        "Servings":{
+        "Servings": {
             "type": "number",
             "number": null
         },
@@ -74,97 +74,9 @@
             "type": "multi_select",
             "multi_select": []
         },
-        "Time Label": {
-            "type": "rich_text",
-            "rich_text": [
-                {
-                    "type": "text",
-                    "text": {
-                        "content": "Total Time",
-                        "link": null
-                    },
-                    "annotations": {
-                        "bold": false,
-                        "italic": false,
-                        "strikethrough": false,
-                        "underline": false,
-                        "code": false,
-                        "color": "gray"
-                    },
-                    "plain_text": "Total Time",
-                    "href": null
-                }
-            ]
-        },
         "Tags": {
             "type": "multi_select",
             "multi_select": []
-        },
-        "Course Label": {
-            "type": "rich_text",
-            "rich_text": [
-                {
-                    "type": "text",
-                    "text": {
-                        "content": "Course",
-                        "link": null
-                    },
-                    "annotations": {
-                        "bold": false,
-                        "italic": false,
-                        "strikethrough": false,
-                        "underline": false,
-                        "code": false,
-                        "color": "gray"
-                    },
-                    "plain_text": "Course",
-                    "href": null
-                }
-            ]
-        },
-        "Tags Label": {
-            "type": "rich_text",
-            "rich_text": [
-                {
-                    "type": "text",
-                    "text": {
-                        "content": "Tags",
-                        "link": null
-                    },
-                    "annotations": {
-                        "bold": false,
-                        "italic": false,
-                        "strikethrough": false,
-                        "underline": false,
-                        "code": false,
-                        "color": "gray"
-                    },
-                    "plain_text": "Tags",
-                    "href": null
-                }
-            ]
-        },
-        "Calorie-Protein Ratio Label": {
-            "type": "rich_text",
-            "rich_text": [
-                {
-                    "type": "text",
-                    "text": {
-                        "content": "Calorie-Protein Ratio",
-                        "link": null
-                    },
-                    "annotations": {
-                        "bold": false,
-                        "italic": false,
-                        "strikethrough": false,
-                        "underline": false,
-                        "code": false,
-                        "color": "gray"
-                    },
-                    "plain_text": "Calorie-Protein Ratio",
-                    "href": null
-                }
-            ]
         },
         "Cover": {
             "type": "files",
